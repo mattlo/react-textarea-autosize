@@ -21,6 +21,11 @@ export default class TextareaAutosize extends React.Component {
     onChange: React.PropTypes.func,
 
     /**
+     * Callback on key down.
+     */
+    onKeydown: React.PropTypes.func,
+
+    /**
      * Callback on height changes.
      */
     onHeightChange: React.PropTypes.func,
@@ -53,7 +58,8 @@ export default class TextareaAutosize extends React.Component {
   static defaultProps = {
     onChange: emptyFunction,
     onHeightChange: emptyFunction,
-    useCacheForDOMMeasurements: false
+    useCacheForDOMMeasurements: false,
+    onKeydown: emptyFunction
   }
 
   constructor(props) {
@@ -89,6 +95,7 @@ export default class TextareaAutosize extends React.Component {
     return (
       <textarea
         {...props}
+        onKeydown={this.props.onKeydown || defaultProps.onKeydown}
         onChange={this._onChange}
         ref={this._onRootDOMNode}
         />
